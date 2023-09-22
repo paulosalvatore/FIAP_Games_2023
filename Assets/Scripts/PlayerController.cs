@@ -1,8 +1,11 @@
+using System;
+using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour
 {
+    [Header("Movement")]
     [Range(0.5f, 20f)]
     [SerializeField]
     private float speed = 5f;
@@ -13,6 +16,13 @@ public class PlayerController : MonoBehaviour
 
     [SerializeField]
     private Rigidbody rb;
+
+    [Header("Score")]
+    [SerializeField]
+    private int score;
+
+    [SerializeField]
+    private TMP_Text scoreText;
 
     private void Update()
     {
@@ -32,6 +42,14 @@ public class PlayerController : MonoBehaviour
         if (other.CompareTag("Enemy"))
         {
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+            return;
+        }
+
+        if (other.CompareTag("Coin"))
+        {
+            score++;
+
+            scoreText.text = score.ToString("00000");
         }
     }
 }
