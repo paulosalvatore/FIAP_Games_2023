@@ -1,14 +1,23 @@
 using UnityEngine;
 
-[ExecuteInEditMode]
 public class PlayerController : MonoBehaviour
 {
     [Range(0.5f, 20f)]
     [SerializeField]
     private float speed = 5f;
 
+    [Range(0.5f, 30f)]
+    [SerializeField]
+    private float horizontalSpeed = 15f;
+
     [SerializeField]
     private Rigidbody rb;
+
+    private void Update()
+    {
+        var h = Input.GetAxis("Horizontal");
+        rb.MovePosition(rb.position + Vector3.right * (h * horizontalSpeed * Time.deltaTime));
+    }
 
     private void FixedUpdate()
     {
