@@ -22,6 +22,7 @@ public class PlayerController : MonoBehaviour
     private void FixedUpdate()
     {
         var movement = Vector3.forward * speed;
+        movement.y = rb.velocity.y;
         rb.velocity = movement;
     }
 }
